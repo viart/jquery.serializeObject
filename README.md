@@ -1,7 +1,7 @@
 jQuery.serializeObject
 ======================
 
-# jQuery Helper for the Form values to JSON extraction
+Helper for the Form values to JSON extraction.
 
 ## API
 ```javascript
@@ -9,9 +9,9 @@ jQuery.serializeObject
 ```
 
 ### Possible options
-* `exclude`: list of fields names to exclude
-* `include`: list of fields names to include
-* `includeByClass`: CSS classname to include by
+* `exclude` list of fields names to exclude
+* `include` list of fields names to include
+* `includeByClass` CSS classname to include by
 
 ## TODO
 * Better documentation.
