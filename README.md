@@ -16,4 +16,4 @@ jQuery.serializeObject
 ## TODO
 * Better documentation.
 * Add examples.
-* Cover by the unit-tests.
+* Add unit-tests.
