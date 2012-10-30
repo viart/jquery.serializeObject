@@ -9,7 +9,7 @@
 (function ($) {
 
     var
-    rCRLF = /\r?\n/g,
+        rCRLF = /\r?\n/g,
         rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
         rselectTextarea = /^(?:select|textarea)/i;
 
@@ -18,7 +18,7 @@
 
         var elements = [],
             values = {},
-            settings = $.extend({
+            settings = $.extend(true, {
                 include: [],
                 exclude: [],
                 includeByClass: ''
