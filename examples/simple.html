@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://twitter.github.com/bootstrap//assets/css/bootstrap.css" rel="stylesheet">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../src/jquery.serializeObject.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <form class="form-horizontal">
+            <legend>Example</legend>
+            <div class="control-group">
+                <label><input type="text" name="textInput" value="some text here"> textInput</label>
+                <label><input type="text" name="disabledInput" value="ignore me" disabled> disabledInput</label>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <select name="multiselect" multiple="multiple">
+                        <option value="" selected>some</option>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                    </select> multiselect
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    <select name="singleselect">
+                        <option value="">some</option>
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                    </select> singleselect
+                </label>
+            </div>
+
+            <div class="control-group">
+                <span class="help-block">radio</span>
+                <label class="radio inline"><input type="radio" name="radio" value="1" checked> 1</label>
+                <label class="radio inline"><input type="radio" name="radio" value="2"> 2</label>
+            </div>
+
+            <div class="control-group">
+                <span class="help-block">checkbox</span>
+                <label class="checkbox inline"><input type="checkbox" name="checkbox" value="1"> 1</label>
+                <label class="checkbox inline"><input type="checkbox" name="checkbox" value="2" checked> 2</label>
+                <label class="checkbox inline"><input type="checkbox" name="checkbox" value="3" checked> 3</label>
+                <label class="checkbox inline"><input type="checkbox" name="checkbox" value="4"> 4</label>
+            </div>
+
+            <div class="control-group">
+                <label><input type="text" name="nestedName[a][b][100]" value="a"> nestedName[a][b][100]</label>
+                <label><input type="text" name="nestedName[a][b][101]" value="b"> nestedName[a][b][101]</label>
+                <label><input type="text" name="nestedName[a][b][102]" value="c"> nestedName[a][b][102]</label>
+                <label><input type="text" name="nestedName[a][b][103]" value="d"> nestedName[a][b][103]</label>
+                <label><input type="text" name="nestedName[a][z][100]" value="zzzz"> nestedName[a][z][100]</label>
+            </div>
+
+            <div class="control-group">
+                <label><input type="text" name="nestedNameIncrement[a][b][]" class="test" value="a"> nestedNameIncrement[a][b][]</label>
+                <label><input type="text" name="nestedNameIncrement[a][b][]" class="test" value="b"> nestedNameIncrement[a][b][]</label>
+                <label><input type="text" name="nestedNameIncrement[a][b][]" class="test" value="c"> nestedNameIncrement[a][b][]</label>
+                <label><input type="text" name="nestedNameIncrement[a][b][]" class="test" value="d"> nestedNameIncrement[a][b][]</label>
+            </div>
+
+            <div class="control-group">
+                <label><textarea name="textarea"> some long text goes here....</textarea> textarea</label>
+            </div>
+
+            <input type="submit" class="btn" value="Test">
+        </form>
+    </div>
+
+<script type="text/javascript">
+    $(function() {
+        $('form').submit(function (e) {
+            e.preventDefault();
+            alert('See JS console.');
+            console.log($(this).serializeObject());
+        });
+    });
+</script>
+</body>
+</html>
