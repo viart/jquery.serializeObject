@@ -6,11 +6,12 @@
  * Artem Vitiuk (@avitiuk)
  */
 
-(function (root) {
+(function () {
 
-    var $ = root.jQuery || root.Zepto || root.ender,
-        inputTypes = 'color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week'.split('|'),
-        controls = 'input,select,textarea',
+    var root = this,
+        $ = root.jQuery || root.Zepto || root.ender,
+        inputTypes = 'color,date,datetime,datetime-local,email,hidden,month,number,password,range,search,tel,text,time,url,week'.split(','),
+        inputNodes = 'select,textarea'.split(','),
         rName = /\[([^\]]*)\]/g;
 
     function storeValue(container, parsedName, value) {
@@ -45,7 +46,7 @@
                 includeByClass: ''
             }, options);
 
-        this.find(controls).each(function () {
+        this.find(':input').each(function () {
 
             var parsedName;
 
@@ -53,7 +54,7 @@
             if (!this.name || this.disabled ||
                 settings.exclude.indexOf(this.name) !== -1 ||
                 (settings.include.length && settings.include.indexOf(this.name) === -1) ||
-                (this.className.indexOf(settings.includeByClass) === -1)) {
+                this.className.indexOf(settings.includeByClass) === -1) {
                 return;
             }
 
@@ -64,15 +65,18 @@
                 return;
             }
 
-            if (inputTypes.indexOf(this.type) !== -1 || this.checked) {
+            if (this.checked ||
+                inputTypes.indexOf(this.type) !== -1 ||
+                inputNodes.indexOf(this.nodeName.toLowerCase()) !== -1) {
+
                 // Simulate control with a complex name (i.e. `some[]`)
                 // as it handled in the same way as Checkboxes should
                 if (this.type === 'checkbox') {
                     parsedName.push('');
                 }
-                storeValue(values, parsedName, this.value);
-            } else if (this.nodeName.toLowerCase() === 'select') {
-                // jQuery.val() is used to simplify of getting values from the Multiple Select
+
+                // jQuery.val() is used to simplify of getting values
+                // from the custom controls (which follow jQuery .val() API) and Multiple Select
                 storeValue(values, parsedName, $(this).val());
             }
         });
@@ -80,4 +84,4 @@
         return values;
     };
 
-})(this);
+}).call(this);
