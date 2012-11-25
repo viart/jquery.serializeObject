@@ -14,6 +14,11 @@
         inputNodes = 'select,textarea'.split(','),
         rName = /\[([^\]]*)\]/g;
 
+    // ugly hack for IE7-8
+    function isInArray(array, needle) {
+        return $.inArray(needle, array) !== -1;
+    }
+
     function storeValue(container, parsedName, value) {
 
         var part = parsedName[0];
@@ -52,8 +57,8 @@
 
             // Apply simple checks and filters
             if (!this.name || this.disabled ||
-                settings.exclude.indexOf(this.name) !== -1 ||
-                (settings.include.length && settings.include.indexOf(this.name) === -1) ||
+                isInArray(settings.exclude, this.name) ||
+                (settings.include.length && !isInArray(settings.include, this.name)) ||
                 this.className.indexOf(settings.includeByClass) === -1) {
                 return;
             }
@@ -66,8 +71,8 @@
             }
 
             if (this.checked ||
-                inputTypes.indexOf(this.type) !== -1 ||
-                inputNodes.indexOf(this.nodeName.toLowerCase()) !== -1) {
+                isInArray(inputTypes, this.type) ||
+                isInArray(inputNodes, this.nodeName.toLowerCase())) {
 
                 // Simulate control with a complex name (i.e. `some[]`)
                 // as it handled in the same way as Checkboxes should
